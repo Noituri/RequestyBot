@@ -19,12 +19,13 @@ class MessageHandler(var event: MessageReceivedEvent) {
                 } ?: return
 
                 if (event.isFromType(ChannelType.PRIVATE)) {
-                    Utils.log("PRIV"+ ":" + event.author.name + " " + config[BotSpec.botPrefix] + cmd.commandName)
+                    Utils.log("PRIV"+ ":" + event.author.name + " " + event.message.contentDisplay)
                 } else {
-                    Utils.log(event.guild.name + ": " + config[BotSpec.botPrefix] + cmd.commandName)
+                    Utils.log(event.guild.name + ": " + event.message.contentDisplay)
                 }
 
-                val args = event.message.contentDisplay.split(" ").toTypedArray()
+                val args = event.message.contentDisplay.trim().split(" ").toTypedArray()
+
                 cmd.execute(event, *args)
             }
             else -> {}

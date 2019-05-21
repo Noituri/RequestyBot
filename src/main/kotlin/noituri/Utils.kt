@@ -31,5 +31,14 @@ sealed class Utils {
                 }
             }
         }
+
+        fun getStatusColor(status: Int): Int {
+            when (status) {
+                200 -> return java.lang.Long.parseLong("1AD800", 16).toInt()
+                404 -> return java.lang.Long.parseLong("D80000", 16).toInt()
+                503 -> return java.lang.Long.parseLong("540042", 16).toInt()
+            }
+            return 0
+        }
     }
 }
