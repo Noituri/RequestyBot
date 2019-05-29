@@ -23,49 +23,15 @@ class GetCommand: Command(commandName = "get", desc = "Sends GET request to the 
 
         try {
             val response = get(url)
-
-            event.channel.sendMessage(MessageEmbed(
-                    null,
-                    "[GET] Status: ${response.statusCode}",
-                    """```html
+            val body = """```html
                     |${response.text.removeRange(2000, response.text.length)}
                     |```
-                """.trimMargin(),
-                    EmbedType.IMAGE,
-                    OffsetDateTime.now(),
-                    Utils.getStatusColor(response.statusCode),
-                    null,
-                    null,
-                    null,
-                    null,
-                    MessageEmbed.Footer(
-                            "Issued by ${event.author.name}",
-                            event.author.avatarUrl,
-                            null
-                    ),
-                    null,
-                    null
-            )).queue()
+                """.trimMargin()
+
+            Utils.sendEmbed("[GET] Status: ${response.statusCode}", body, Utils.getStatusColor(response.statusCode), event)
+
         } catch (exc: Exception) {
-            event.channel.sendMessage(MessageEmbed(
-                    null,
-                    "Error occurred",
-                    "```${exc.localizedMessage}```",
-                    EmbedType.IMAGE,
-                    OffsetDateTime.now(),
-                    Utils.getStatusColor(404),
-                    null,
-                    null,
-                    null,
-                    null,
-                    MessageEmbed.Footer(
-                            "Issued by ${event.author.name}",
-                            event.author.avatarUrl,
-                            null
-                    ),
-                    null,
-                    null
-            )).queue()
+            Utils.sendEmbed("Error occurred", "```${exc.localizedMessage}```", Utils.getStatusColor(404), event)
         }
     }
 }

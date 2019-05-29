@@ -27,7 +27,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.ALPHA.0_87</version>
+            <version>4.ALPHA.0_90</version>
         </dependency>
         <dependency>
             <groupId>com.uchuhimo</groupId>
